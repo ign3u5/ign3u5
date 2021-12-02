@@ -3,20 +3,19 @@
 ### Advent of Code
 Day 2:  
 ```javascript
-var state = {f: 0, d: 0};
-document.getElementsByTagName('pre')[0].innerText.split('\n').forEach(el => {
+console.log(Object.values(document.getElementsByTagName('pre')[0].innerText.split('\n').reduce((acc, el) => {
     switch (el.substring(0, 1)) {
         case 'f':
-			state.f += +el.slice(-1);
+			acc.f += +el.slice(-1);
 			break;
         case 'd':
-			state.d += +el.slice(-1);
+			acc.d += +el.slice(-1);
             break;
         case 'u':
-			state.d -= +el.slice(-1);
+			acc.d -= +el.slice(-1);
 			break;
-    }});
-console.log(state.f * state.d);
+    };
+return acc;}, {f:0,d:0})).reduce((acc, el) => acc * el));
 ```
 ```javascript
 var state = {f: 0, d: 0, a: 0};
