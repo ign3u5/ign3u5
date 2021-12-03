@@ -1,7 +1,8 @@
 ### Hi there 👋
 
-### Advent of Code
-Day 2:  
+# Advent of Code
+## Day 2
+### Task 1
 ```javascript
 console.log(Object.values(document.getElementsByTagName('pre')[0].innerText.split('\n').reduce((acc, el) => {
     switch (el.substring(0, 1)) {
@@ -17,6 +18,7 @@ console.log(Object.values(document.getElementsByTagName('pre')[0].innerText.spli
     };
 return acc;}, {f:0,d:0})).reduce((acc, el) => acc * el));
 ```
+### Task 2
 ```javascript
 console.log(Object.values(document.getElementsByTagName('pre')[0].innerText.split('\n').reduce((acc, el) => {
     switch (el.substring(0, 1)) {
