@@ -40,7 +40,7 @@ return acc;}, {f:0,d:0,a:0})).reduce((acc, el, i) => i < 2 ? acc * el : acc));
 ### Task 2
 ```javascript
 var rawInput = document.getElementsByTagName('pre')[0].innerText.split('\n').map(el => Array.from(el));
-var validate = (arr, i, pref) => !(arr.length-1) ? parseInt(arr[0].reduce((acc, el) => acc += el, ''), 2) : validate(arr.filter(el => +el[i] == pref(arr.reduce((acc, el) => acc + +el[i], 0) >= arr.length / 2)), ++i, pref);
+var validate = (arr, i, pref) => !(arr.length - 1) ? parseInt(arr[0].reduce((acc, el) => acc += el, ''), 2) : validate(arr.filter(el => +el[i] == pref(arr.reduce((acc, el) => acc + +el[i], 0) >= arr.length / 2)), ++i, pref);
 validate(rawInput, 0, b => b ? 1 : 0) * validate(rawInput, 0, b => b ? 0 : 1);
 ```
 
