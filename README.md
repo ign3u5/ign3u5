@@ -44,6 +44,67 @@ var validate = (arr, i, pref) => !(arr.length - 1) ? parseInt(arr[0].reduce((acc
 validate(rawInput, 0, b => b ? 1 : 0) * validate(rawInput, 0, b => b ? 0 : 1);
 ```
 
+## Day 4
+### Task 1
+```javascript
+var rawInput = document.getElementsByTagName('pre')[0].innerText.split('\n\n').map(el => el.split('\n')).map(el => el.map(x => x.split(' ').filter(n => n != '')));
+var listOfNumbers = rawInput.splice(0, 1)[0][0][0].split(',');
+rawInput = rawInput.map(el => el.map(x => x.map(t => ({n: t, c: false}))));
+rawInput[99].splice(5, 1);
+
+var getResult = () => {
+for (const num of listOfNumbers) {
+    mark(rawInput, num);
+    var result = checkForBingo(rawInput, num);
+    if (result != -1) {
+        return result;
+    }
+}; return -1;};
+
+var mark = (arr, num) => {
+    arr.forEach(el => el.forEach(x => x.forEach(n => +n.n == +num ? n.c = true : n.c)));
+}
+
+var checkForBingo = (arr, n) => {
+    var winningGridIndex = -1;
+    arr.forEach((el, i) => checkHorizontal(el) || checkVertical(el) ? winningGridIndex = i : winningGridIndex);
+    if (winningGridIndex != -1) {
+        var filteredArrays = arr[winningGridIndex].flatMap(el => el.filter(x => !x.c));
+        var totalFalseValues = filteredArrays.reduce((acc, el) => acc + +el.n, 0);
+        var result = totalFalseValues * +n;
+        return result;
+    }
+    return winningGridIndex;
+}
+
+var checkHorizontal = (grid) => {
+    for (const line of grid) {
+        if (!line.some(x => !x.c)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+var checkVertical = (grid) => {
+    for (var i = 0; i < grid.length; i++) {
+        var lineResult = true;
+        for (var l = 0; l < grid.length; l++) {
+            if (!grid[l][i].c) {
+                lineResult = false;
+                break;
+            }
+        }
+        if (lineResult) {
+            return true;
+        }
+    }
+    return false;
+}
+
+getResult();
+```
+
 <!--
 **ign3u5/ign3u5** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
